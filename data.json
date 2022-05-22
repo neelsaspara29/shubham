@@ -1,0 +1,182 @@
+[
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"BEE",
+    "s_code":"3110005",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"BME",
+    "s_code":"3110006",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"BCE",
+    "s_code":"3110004",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"PPS",
+    "s_code":"3110003",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"ES",
+    "s_code":"3110007",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"EGD",
+    "s_code":"3110013",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"BE",
+    "s_code":"3110016",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"Maths-I",
+    "s_code":"3110014",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+    {
+    "d_name":"CS",
+    "sem":"1",
+    "subject":"Maths-II",
+    "s_code":"3110015",
+    "b_name":"Basic Electrical Engineering",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"ETC",
+    "s_code":"3130004",
+    "b_name":"Effective Technical Communication",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"IC",
+    "s_code":"3130007",
+    "b_name":"Indian Constitution",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"DF",
+    "s_code":"3130704",
+    "b_name":"Digital Fundamentals",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"P&S",
+    "s_code":"3130006",
+    "b_name":"Probability and Statistics",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"DS",
+    "s_code":"3130702",
+    "b_name":"Data Structures",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"3",
+    "subject":"DBMS",
+    "s_code":"3130703",
+    "b_name":"Database Management Systems",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"4",
+    "subject":"DM",
+    "s_code":"3140708",
+    "b_name":"Discrete Mathematics",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"4",
+    "subject":"PEM",
+    "s_code":"3140709",
+    "b_name":"PEM",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"4",
+    "subject":"OS",
+    "s_code":"3140702",
+    "b_name":"Operating System",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"4",
+    "subject":"OOP-1",
+    "s_code":"3140705",
+    "b_name":"Object Oriented Programming -I",
+    "p_name":"Technical",
+    "price":100
+   },
+   {
+    "d_name":"CS",
+    "sem":"4",
+    "subject":"COA",
+    "s_code":"3140707",
+    "b_name":"Computer Organization & Architecture",
+    "p_name":"Technical",
+    "price":100
+   }
+]
