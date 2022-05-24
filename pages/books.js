@@ -38,6 +38,26 @@ function books() {
     return index;
   };
 
+  const reduceQty = (_id, item) => {
+    const index = findIndex(_id);
+    const qty = cart[index].count;
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      item: {
+        index: index,
+        qty: qty,
+        item: item,
+      },
+    });
+  };
+
+  const addToCart = (item) => {
+    dispatch({
+      type: "ADD_TO_CART",
+      item: item,
+    });
+  };
+
   useEffect(() => {
     // const para = String(query.dep);
     if (query.dep) {
@@ -215,23 +235,44 @@ function books() {
                 </div>
                 <div
                   className={styles.bookscart}
-                  onClick={() => {
-                    dispatch({
-                      type: "ADD_TO_CART",
-                      item: {
+                  onClick={
+                    findIndex(_id) == -1
+                      ? () => {
+                          addToCart({
+                            id: _id,
+                            b_name: b_name,
+                            price: price,
+                            count: findCount(_id) + 1,
+                            index: findIndex(_id),
+                          });
+                        }
+                      : () => {}
+                  }
+                >
+                  {findIndex(_id) == -1 ? (
+                    "add to cart"
+                  ) : (
+                    <CartButton
+                      reduce={() => {
+                        reduceQty(_id, {
+                          id: _id,
+                          b_name: b_name,
+                          price: price,
+                          count: findCount(_id) - 1,
+                          index: findIndex(_id),
+                        });
+                      }}
+                      name={cart[findIndex(_id)].count}
+                      add = {() => {
+                        addToCart({
                         id: _id,
                         b_name: b_name,
                         price: price,
                         count: findCount(_id) + 1,
                         index: findIndex(_id),
-                      },
-                    });
-                  }}
-                >
-                  {findIndex(_id) == -1 ? (
-                    "add to cart"
-                  ) : (
-                    <CartButton re name={"neel"} />
+                      }) 
+                      }}
+                    />
                   )}
                 </div>
               </div>
@@ -243,12 +284,17 @@ function books() {
   );
 }
 
-const CartButton = ({ name }) => {
+const CartButton = ({ name, reduce, add }) => {
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ width: "25%", borderRight: "1px solid black" }}>+</div>
-      <div style={{ width: "70%" }}>{name}</div>
-      <div style={{ width: "25%", borderLeft: "1px solid black" }}>-</div>
+      <div
+        onClick={reduce}
+        style={{ width: "25%", borderRight: "1px solid black" }}
+      >
+        -
+      </div>
+      <div  style={{ width: "70%" }}>{name}</div>
+      <div onClick={add} style={{ width: "25%", borderLeft: "1px solid black" }}>+</div>
     </div>
   );
 };

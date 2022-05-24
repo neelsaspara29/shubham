@@ -40,12 +40,36 @@ export const reducer = (state  , action) => {
                return {
                    ...state,
                    
-                   cart : [...cart]
+                   cart : [...newCart]
                }
            
                 
            }
         
+        case 'REMOVE_FROM_CART' :
+            const qty = action.item.qty;
+            const index2 = action.item.index;
+            if(qty == 1) {
+                let newCart = [...state.cart]
+            
+           
+               newCart.splice(index2,1)
+
+               return {
+                   ...state,
+                   
+                   cart : [...newCart]
+               }
+            }else {
+                state.cart[action.item.index] = action.item.item
+
+                return {
+                    ...state,
+                    cart: [...state.cart]
+                }
+            }
+
+
 
        
 
