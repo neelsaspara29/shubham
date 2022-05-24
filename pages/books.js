@@ -16,14 +16,13 @@ function books() {
   const router = useRouter();
 
   const findCount = (_id) => {
-    const index =  cart.findIndex((item) => {
-      return (item.id == _id)
-    })
-    console.log(cart)
-    if(index != -1) {
+    const index = cart.findIndex((item) => {
+      return item.id == _id;
+    });
+    console.log(cart);
+    if (index != -1) {
       return cart[index].count;
-
-    }else {
+    } else {
       return 0;
     }
     // console.log(index);
@@ -32,12 +31,12 @@ function books() {
   };
 
   const findIndex = (_id) => {
-    const index =  cart.findIndex((item) => {
-      return (item.id == _id)
-    })
+    const index = cart.findIndex((item) => {
+      return item.id == _id;
+    });
     // console.log(cart)
     return index;
-  }
+  };
 
   useEffect(() => {
     // const para = String(query.dep);
@@ -224,12 +223,16 @@ function books() {
                         b_name: b_name,
                         price: price,
                         count: findCount(_id) + 1,
-                        index: findIndex(_id)
+                        index: findIndex(_id),
                       },
                     });
                   }}
                 >
-                  ({(findIndex(_id) == -1) ? "add to cart" : <div>+ </div> + cart[findIndex(_id)].count})
+                  {findIndex(_id) == -1 ? (
+                    "add to cart"
+                  ) : (
+                    <CartButton re name={"neel"} />
+                  )}
                 </div>
               </div>
             );
@@ -239,5 +242,15 @@ function books() {
     </>
   );
 }
+
+const CartButton = ({ name }) => {
+  return (
+    <div style={{ display: "flex" }}>
+      <div style={{ width: "25%", borderRight: "1px solid black" }}>+</div>
+      <div style={{ width: "70%" }}>{name}</div>
+      <div style={{ width: "25%", borderLeft: "1px solid black" }}>-</div>
+    </div>
+  );
+};
 
 export default books;
