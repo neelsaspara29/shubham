@@ -1,5 +1,5 @@
 import React from "react";
-import { useStateValue } from "../Component/StateProvider";
+import { useStateValue } from "../Component/redux/StateProvider";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
 
