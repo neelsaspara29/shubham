@@ -34,6 +34,11 @@ function MyApp({ Component, pageProps }) {
                 <a>Books</a>
               </Link>
             </li>
+            <li key={"books"}>
+              <Link href="/cart">
+                <a>cart</a>
+              </Link>
+            </li>
           </ul>
           <div className={styles.navLogin}>SignUP</div>
         </nav>
