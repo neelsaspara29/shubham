@@ -11,7 +11,6 @@ export const reducer = (state  , action) => {
 
     switch(action.type){
         case 'ADD_TO_CART' :
-            console.log(action.item) 
             if(action.item.index == -1) {
                 return {
                     ...state,
@@ -39,7 +38,6 @@ export const reducer = (state  , action) => {
 
                return {
                    ...state,
-                   
                    cart : [...newCart]
                }
            

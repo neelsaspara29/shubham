@@ -1,19 +1,17 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import { useState, useEffect } from "react";
-import department from "../Component/departdata";
+import department from "../FrontEndData/departdata";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useStateValue } from "../Component/StateProvider";
+import { useStateValue } from "../Component/redux/StateProvider";
 const axios = require("axios");
 
 function books() {
   const [dept, setdept] = useState([]);
   const [{ cart }, dispatch] = useStateValue();
-  const [refresh, setRefresh] = useState(false);
   const [selected, setSelected] = useState();
   const { query } = useRouter();
-  const router = useRouter();
 
   const findCount = (_id) => {
     const index = cart.findIndex((item) => {
@@ -75,7 +73,6 @@ function books() {
 
   const run = async (na, id) => {
     const depname = String(na);
-    console.log(depname);
     document.getElementById(depname).scrollIntoView();
 
     const response = await axios.get(
@@ -263,14 +260,14 @@ function books() {
                         });
                       }}
                       name={cart[findIndex(_id)].count}
-                      add = {() => {
+                      add={() => {
                         addToCart({
-                        id: _id,
-                        b_name: b_name,
-                        price: price,
-                        count: findCount(_id) + 1,
-                        index: findIndex(_id),
-                      }) 
+                          id: _id,
+                          b_name: b_name,
+                          price: price,
+                          count: findCount(_id) + 1,
+                          index: findIndex(_id),
+                        });
                       }}
                     />
                   )}
@@ -293,8 +290,13 @@ const CartButton = ({ name, reduce, add }) => {
       >
         -
       </div>
-      <div  style={{ width: "70%" }}>{name}</div>
-      <div onClick={add} style={{ width: "25%", borderLeft: "1px solid black" }}>+</div>
+      <div style={{ width: "70%" }}>{name}</div>
+      <div
+        onClick={add}
+        style={{ width: "25%", borderLeft: "1px solid black" }}
+      >
+        +
+      </div>
     </div>
   );
 };
