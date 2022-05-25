@@ -2,8 +2,8 @@ import "../styles/globals.css";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { initialState, reducer } from "../Component/reducer";
-import { StateProvider } from "../Component/StateProvider";
+import { initialState, reducer } from "../Component/redux/reducer";
+import { StateProvider } from "../Component/redux/StateProvider";
 
 function MyApp({ Component, pageProps }) {
   return (
