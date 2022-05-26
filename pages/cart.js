@@ -50,7 +50,7 @@ const cart2 = () => {
   };
   return (
     <div>
-      {cart.map(({ price, b_name, _id }) => {
+      {cart.map(({ price, b_name, id }) => {
         {
           /* const count = cart.filter((item) => {
               return (item.id == _id)
@@ -78,40 +78,40 @@ const cart2 = () => {
             <div
               className={styles.bookscart}
               onClick={
-                findIndex(_id) == -1
+                findIndex(id) == -1
                   ? () => {
                       addToCart({
-                        id: _id,
+                        id: id,
                         b_name: b_name,
                         price: price,
-                        count: findCount(_id) + 1,
-                        index: findIndex(_id),
+                        count: findCount(id) + 1,
+                        index: findIndex(id),
                       });
                     }
                   : () => {}
               }
             >
-              {findIndex(_id) == -1 ? (
+              {findIndex(id) == -1 ? (
                 "add to cart"
               ) : (
                 <CartButton
                   reduce={() => {
-                    reduceQty(_id, {
-                      id: _id,
+                    reduceQty(id, {
+                      id: id,
                       b_name: b_name,
                       price: price,
-                      count: findCount(_id) - 1,
-                      index: findIndex(_id),
+                      count: findCount(id) - 1,
+                      index: findIndex(id),
                     });
                   }}
-                  name={findIndex(_id)}
+                  name={findIndex(id)}
                   add={() => {
                     addToCart({
-                      id: _id,
+                      id: id,
                       b_name: b_name,
                       price: price,
-                      count: findCount(_id) + 1,
-                      index: findIndex(_id),
+                      count: findCount(id) + 1,
+                      index: findIndex(id),
                     });
                   }}
                 />
