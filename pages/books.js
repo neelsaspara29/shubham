@@ -73,7 +73,11 @@ function books() {
 
   const run = async (na, id) => {
     const depname = String(na);
-    document.getElementById(depname).scrollIntoView();
+    dispatch({
+      type: "ADD_URL",
+      item: `?dep=${na}#${na}`,
+    });
+    na == query.dep && document.getElementById(depname).scrollIntoView();
 
     const response = await axios.get(
       `http://localhost:3000/api/hello?dep=${na}&sem=${id}`
@@ -205,7 +209,7 @@ function books() {
           }}
           className={styles.booksbody}
         >
-          {dept.map(({ price, b_name, _id }) => {
+          {dept.map(({ price, b_name, _id, d_name, sem, s_code, p_name }) => {
             {
               /* const count = cart.filter((item) => {
               return (item.id == _id)
@@ -241,6 +245,10 @@ function books() {
                             price: price,
                             count: findCount(_id) + 1,
                             index: findIndex(_id),
+                            d_name: d_name,
+                            sem: sem,
+                            s_code: s_code,
+                            p_name: p_name,
                           });
                         }
                       : () => {}
@@ -257,6 +265,10 @@ function books() {
                           price: price,
                           count: findCount(_id) - 1,
                           index: findIndex(_id),
+                          d_name: d_name,
+                          sem: sem,
+                          s_code: s_code,
+                          p_name: p_name,
                         });
                       }}
                       name={cart[findIndex(_id)].count}
@@ -267,6 +279,10 @@ function books() {
                           price: price,
                           count: findCount(_id) + 1,
                           index: findIndex(_id),
+                          d_name: d_name,
+                          sem: sem,
+                          s_code: s_code,
+                          p_name: p_name,
                         });
                       }}
                     />
@@ -286,14 +302,22 @@ const CartButton = ({ name, reduce, add }) => {
     <div style={{ display: "flex" }}>
       <div
         onClick={reduce}
-        style={{ width: "25%", borderRight: "1px solid black" }}
+        style={{
+          width: "25%",
+          borderRight: "1px solid black",
+          cursor: "pointer",
+        }}
       >
         -
       </div>
       <div style={{ width: "70%" }}>{name}</div>
       <div
         onClick={add}
-        style={{ width: "25%", borderLeft: "1px solid black" }}
+        style={{
+          width: "25%",
+          borderLeft: "1px solid black",
+          cursor: "pointer",
+        }}
       >
         +
       </div>

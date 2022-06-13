@@ -2,6 +2,7 @@ import React from "react";
 import { useStateValue } from "../Component/redux/StateProvider";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
+import { getCartTotal, getTotalQty } from "../Component/redux/reducer";
 
 const cart2 = () => {
   const [{ cart }, dispatch] = useStateValue();
@@ -49,96 +50,114 @@ const cart2 = () => {
     });
   };
   return (
-    <div>
-      {cart.map(({ price, b_name, id }) => {
-        {
-          /* const count = cart.filter((item) => {
-              return (item.id == _id)
-            }) */
-        }
+    <>
+      <section className={styles.cartheader}>
+        <div>Book Summery</div>
+      </section>
+      <section className={styles.cartitems}>
+        {cart.map(
+          ({ b_name, price, id, count, d_name, s_code, sem, p_name }) => {
+            return (
+              <div className={styles.item}>
+                <div className={styles.discription}>
+                  <div>
+                    <Image src="/Images/CSDS.jpg" width={100} height={150} />
+                  </div>
+                  <div>
+                    <h5>{b_name}</h5>
+                    <p>Semester : {sem}</p>
+                    <p>Department name : {d_name}</p>
+                    <p>subject code : {s_code}</p>
+                    <p>Publication name: {p_name}</p>
+                  </div>
+                </div>
 
-        {
-          /* console.log(count.length()) */
-        }
-        return (
-          <div className={styles.book}>
-            <div>
-              <Image src={"/Images/CSDS.jpg"} width={300} height={300} />
-            </div>
-            <div style={{ fontSize: "16px" }}>{b_name}</div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "16px",
-              }}
-            >
-              <span>Price</span> &#8377; {price}/-
-            </div>
-            <div
-              className={styles.bookscart}
-              onClick={
-                findIndex(id) == -1
-                  ? () => {
+                <div>
+                  <h5>{price}/-</h5>
+                </div>
+                <div>
+                  <h5>Quantity</h5>
+                  <p>{count}</p>{" "}
+                  <p
+                    onClick={() => {
                       addToCart({
                         id: id,
                         b_name: b_name,
                         price: price,
                         count: findCount(id) + 1,
                         index: findIndex(id),
+                        d_name: d_name,
+                        sem: sem,
+                        s_code: s_code,
+                        p_name: p_name,
                       });
-                    }
-                  : () => {}
-              }
-            >
-              {findIndex(id) == -1 ? (
-                "add to cart"
-              ) : (
-                <CartButton
-                  reduce={() => {
-                    reduceQty(id, {
-                      id: id,
-                      b_name: b_name,
-                      price: price,
-                      count: findCount(id) - 1,
-                      index: findIndex(id),
-                    });
-                  }}
-                  name={findIndex(id)}
-                  add={() => {
-                    addToCart({
-                      id: id,
-                      b_name: b_name,
-                      price: price,
-                      count: findCount(id) + 1,
-                      index: findIndex(id),
-                    });
-                  }}
-                />
-              )}
-            </div>
-          </div>
-        );
-      })}
-    </div>
+                    }}
+                  >
+                    add
+                  </p>
+                  <p
+                    onClick={() => {
+                      reduceQty(id, {
+                        id: id,
+                        b_name: b_name,
+                        price: price,
+                        count: findCount(id) - 1,
+                        index: findIndex(id),
+                        d_name: d_name,
+                        sem: sem,
+                        s_code: s_code,
+                        p_name: p_name,
+                      });
+                    }}
+                  >
+                    remove
+                  </p>
+                </div>
+                <div>
+                  <h4>{count * price}/-</h4>
+                </div>
+              </div>
+            );
+          }
+        )}
+      </section>
+      <section
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+        }}
+      >
+        <span>Total Qty: {getTotalQty(cart)}</span>
+        <span>Total Amount: {getCartTotal(cart)}/-</span>
+      </section>
+    </>
   );
 };
 
 const CartButton = ({ name, reduce, add }) => {
-const [{ cart }, dispatch] = useStateValue();
+  const [{ cart }, dispatch] = useStateValue();
 
   return (
     <div style={{ display: "flex" }}>
       <div
         onClick={reduce}
-        style={{ width: "25%", borderRight: "1px solid black" }}
+        style={{
+          width: "25%",
+          borderRight: "1px solid black",
+          cursor: "pointer",
+        }}
       >
         -
       </div>
       <div style={{ width: "70%" }}>{cart[name].count}</div>
       <div
         onClick={add}
-        style={{ width: "25%", borderLeft: "1px solid black" }}
+        style={{
+          width: "25%",
+          borderLeft: "1px solid black",
+          cursor: "pointer",
+        }}
       >
         +
       </div>

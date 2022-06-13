@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import {setCookies} from 'cookies-next'
+import { setCookies} from 'cookies-next'
 // const bcrypt = require('bcrypt');
 
 
