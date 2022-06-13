@@ -64,7 +64,7 @@ function signup() {
             <p>
               <label for="enroll">Enrollment Number</label>
             </p>
-            <input type="number" id="enroll" {...register("enroll")} />
+            <input type="text" id="enroll" {...register("enroll")} />
             {errors.enroll && (
               <p className={styles.error}>{errors.enroll.message}</p>
             )}
@@ -73,7 +73,7 @@ function signup() {
             <p>
               <label for="mobile">Mobile Number</label>
             </p>
-            <input type="number" id="mobile" {...register("mobile")} />
+            <input type="text" id="mobile" {...register("mobile")} />
             {errors.mobile && (
               <p className={styles.error}>{errors.mobile.message}</p>
             )}
