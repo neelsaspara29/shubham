@@ -17,9 +17,6 @@ const cart2 = () => {
     } else {
       return 0;
     }
-    // console.log(index);
-
-    // return 0;
   };
 
   const findIndex = (_id) => {

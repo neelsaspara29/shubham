@@ -1,6 +1,6 @@
 export const initialState = {
   cart: [],
-  booksUrl: "",
+  len:0
 };
 
 export const getCartTotal = (cart2) => {

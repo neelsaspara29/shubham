@@ -23,16 +23,12 @@ function books() {
     } else {
       return 0;
     }
-    // console.log(index);
-
-    // return 0;
   };
 
   const findIndex = (_id) => {
     const index = cart.findIndex((item) => {
       return item.id == _id;
     });
-    // console.log(cart)
     return index;
   };
 
@@ -210,15 +206,6 @@ function books() {
           className={styles.booksbody}
         >
           {dept.map(({ price, b_name, _id, d_name, sem, s_code, p_name }) => {
-            {
-              /* const count = cart.filter((item) => {
-              return (item.id == _id)
-            }) */
-            }
-
-            {
-              /* console.log(count.length()) */
-            }
             return (
               <div className={styles.book}>
                 <div>
