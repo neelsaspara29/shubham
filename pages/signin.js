@@ -3,9 +3,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const schema = yup.object().shape({
-  enroll: yup.string().required().min(10).max(10),
+  enroll: yup.string().required().min(12).max(12),
   password: yup.string().required().min(8),
 });
 
@@ -19,13 +21,25 @@ function signin() {
       return { ...data, [name]: [value] };
     });
   };
+
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const run = async () => {
     let signin_res = await axios({
       method: "post",
       url: "http://localhost:3000/api/signin",
       contentType: "application/json",
       headers: {},
-      data: formobj,
+      data: {
+        enroll: watch("enroll"),
+        password: watch("password"),
+      },
     });
     if (String(signin_res.status) == "200") {
       router.push("/books?dep=" + "Computer Engineering");
@@ -33,38 +47,34 @@ function signin() {
       alert("invalid");
     }
   };
+
+  const handleOnSubmit = () => {
+    run()
+  };
   return (
     <div className="container">
       <dive>
         <h1>Sign in</h1>
-        <form>
+        <form onSubmit={handleSubmit(handleOnSubmit)}>
           <div className="line">
             <p>
               <label for="enroll">Enrollment Number</label>
             </p>
-            <input
-              onChange={changeformobj}
-              type="text"
-              id="enroll"
-              name="enroll"
-              value={formobj.enroll}
-              required
-            />
+            <input type="text" id="enroll" {...register("enroll")} />
+            {errors.enroll && (
+              <p style={{ color: "red" }}>{errors.enroll.message}</p>
+            )}
           </div>
           <div>
             <p>
               <label for="userNmae">Password</label>
             </p>
-            <input
-              onChange={changeformobj}
-              type="password"
-              id="password"
-              name="password"
-              value={formobj.password}
-              required
-            />
+            <input type="password" id="password" {...register("password")} />
+            {errors.password && (
+              <p style={{ color: "red" }}>{errors.password.message}</p>
+            )}
           </div>
-          <button onClick={() => run()} type="button" id="btn">
+          <button type="submit" id="btn">
             Sign in Now
           </button>
           <p>
