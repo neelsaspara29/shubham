@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import DepartmentHome from '../Component/DepartmentHome'
 
 
