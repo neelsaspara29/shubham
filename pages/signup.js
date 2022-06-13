@@ -4,32 +4,17 @@ import { useRouter } from "next/router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// import "./error.css";
 import styles from "../styles/Home.module.css";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  enroll: yup.number().required().min(12).max(12),
-  mobile: yup.number().required().min(10).max(10),
-  password: yup.string().required().min(8),
+  enroll: yup.number().required(),
+  mobile: yup.number().required(),
+  password: yup.string().required(),
 });
 
 function signup() {
   const router = useRouter();
-  const [formobj, setformobj] = useState({
-    enroll: "",
-    mobile: "",
-    name: "",
-    password: "",
-  });
-  const changeformdata = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setformobj((data) => {
-      return { ...data, [name]: [value] };
-    });
-  };
-
   const {
     register,
     handleSubmit,
@@ -44,7 +29,12 @@ function signup() {
       url: "http://localhost:3000/api/signup",
       contentType: "application/json",
       headers: {},
-      data: formobj,
+      data: {
+        name: watch('name'),
+  enroll: watch('enroll'),
+  mobile: watch('mobile'),
+  password: watch('password'),
+      },
     });
     if (String(data.status) == "200") {
       router.push("/signin");
@@ -54,10 +44,7 @@ function signup() {
   };
 
   const handleOnSubmit = () => {
-    console.log(watch("enroll"));
-    console.log(watch("name"));
-    console.log(watch("mobile"));
-    console.log(watch("password"));
+    run();
   };
   return (
     <div className="container">
