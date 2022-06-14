@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   if (data.otp != code) {
-    return res.status(410).send("invalid otp");
+    return res.status(210).send("invalid otp");
   }
 
   if (data.otp == code) {

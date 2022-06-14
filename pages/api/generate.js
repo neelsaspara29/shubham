@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { string } from "yup";
 // import unirest from "unirest";
 
 const accountSid = "ACfeefb2b03938f0c15f601037e5ec90cb";
@@ -22,10 +23,11 @@ export default async function handler(req, res) {
     mobile: mobile,
   });
 
-  let otp
+  let otp;
 
   if (!data) {
-    const otp = Math.floor(Math.random() * 10000 + 1);
+    const ruffOtp = Math.floor(10000 + Math.random() * 900000);
+    otp = String(ruffOtp).substring(0, 4);
 
     const dataInsert = await client
       .db("LeaseBooks")
@@ -33,19 +35,19 @@ export default async function handler(req, res) {
       .insertOne({
         name: name,
         mobile: mobile,
-        otp: random,
+        otp: otp,
       });
-  
+
     if (!dataInsert) {
       console.log("fail");
     } else {
       console.log("success");
     }
-  }else {
+  } else {
     otp = data.otp;
   }
 
-  console.log(otp)
+  console.log(otp);
 
   // sms.query({
   //   authorization:
@@ -66,16 +68,13 @@ export default async function handler(req, res) {
   //   console.log(res2.body);
   // });
 
-  
-  client2.messages
-    .create({
-      body: `${otp} is you otp for lease book system`,
-      from: "+17123544042",
-      to: "+919879207104",
-    })
-    .then((message) => console.log(message));
-
-
+  // await client2.messages
+  //   .create({
+  //     body: `${otp} is you otp for lease book system`,
+  //     from: "+17123544042",
+  //     to: "+919879207104",
+  //   })
+  //   .then((message) => console.log(message));
 
   res.status(200).send("hello");
 }

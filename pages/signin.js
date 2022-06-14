@@ -83,6 +83,12 @@ function signin() {
               <span className="signUPbtn"> Sign Up</span>
             </Link>
           </p>
+          <p>
+            Forgot Password?{" "}
+            <Link href={"/signup"}>
+              <span className="signUPbtn"> Sign Up</span>
+            </Link>
+          </p>
         </form>
       </dive>
       <div className="section2">
