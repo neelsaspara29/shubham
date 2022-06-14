@@ -5,16 +5,21 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import styles from "../styles/Home.module.css";
+import BlackDrop from "../Component/BlackDrop";
+import Modal from "../Component/Modal";
+import OtpForm from "../Component/OtpForm";
+import OtpVerifyOpen from "../Component/OtpVerifyOpen";
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  enroll: yup.number().required(),
-  mobile: yup.number().required(),
-  password: yup.string().required(),
+  enroll: yup.string().required().min(12).max(12),
+  mobile: yup.string().required().min(10).max(10),
+  password: yup.string().required().min(8),
 });
 
 function signup() {
   const router = useRouter();
+  const [otpBox, setOtpBox] = useState(false);
   const {
     register,
     handleSubmit,
@@ -30,10 +35,10 @@ function signup() {
       contentType: "application/json",
       headers: {},
       data: {
-        name: watch('name'),
-  enroll: watch('enroll'),
-  mobile: watch('mobile'),
-  password: watch('password'),
+        name: watch("name"),
+        enroll: watch("enroll"),
+        mobile: watch("mobile"),
+        password: watch("password"),
       },
     });
     if (String(data.status) == "200") {
@@ -44,10 +49,12 @@ function signup() {
   };
 
   const handleOnSubmit = () => {
-    run();
+    setOtpBox(true);
   };
   return (
     <div className="container">
+      {otpBox && <OtpVerifyOpen />}
+
       <dive>
         <h5>Welcome to our - BookWorld</h5>
         <form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -55,7 +62,12 @@ function signup() {
             <p>
               <label for="name">Full Name</label>
             </p>
-            <input type="text" id="name" {...register("name")} />
+            <input
+              style={{ zIndex: 10 }}
+              type="text"
+              id="name"
+              {...register("name")}
+            />
             {errors.name && (
               <p className={styles.error}>{errors.name.message}</p>
             )}
