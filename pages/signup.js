@@ -48,12 +48,30 @@ function signup() {
     }
   };
 
+  const generated = async () => {
+    const data = await axios({
+      method: "post",
+      url: "http://localhost:3000/api/generate",
+      contentType: "application/json",
+      headers: {},
+      data: {
+        name: watch("name"),
+        mobile: watch("mobile"),
+      },
+    });
+
+    if (String(data.status) == "200") {
+      console.log("ok");
+    }
+  };
+
   const handleOnSubmit = () => {
     setOtpBox(true);
+    generated();
   };
   return (
     <div className="container">
-      {otpBox && <OtpVerifyOpen />}
+      {otpBox && <OtpVerifyOpen onSubmit = {run} mobile = {watch('mobile')} />}
 
       <dive>
         <h5>Welcome to our - BookWorld</h5>

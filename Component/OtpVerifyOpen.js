@@ -3,12 +3,12 @@ import BlackDrop from "./BlackDrop";
 import Modal from "./Modal";
 import OtpForm from "./OtpForm";
 
-const OtpVerifyOpen = () => {
+const OtpVerifyOpen = ({ onSubmit, mobile }) => {
   return (
     <>
       <BlackDrop />
       <Modal>
-        <OtpForm />
+        <OtpForm onSubmit={onSubmit} mobile={mobile} />
       </Modal>
     </>
   );
