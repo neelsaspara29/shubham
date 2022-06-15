@@ -4,6 +4,7 @@ import OtpInput from "react-otp-input";
 import axios from "axios";
 
 const OtpForm = ({ onSubmit, mobile }) => {
+  const [invalid, setInvalid] = useState(false);
   const [otp, setOtp] = useState();
   //   const [] = useFocus();
 
@@ -24,6 +25,10 @@ const OtpForm = ({ onSubmit, mobile }) => {
 
       onSubmit();
     }
+
+    if (String(data.status) == "210") {
+      setInvalid(true);
+    }
   };
 
   const handleOnSubmit = () => {
@@ -33,6 +38,7 @@ const OtpForm = ({ onSubmit, mobile }) => {
   return (
     <>
       <div>
+        {invalid && <p style={{ color: "white" }}>Invalid Otp Try again</p>}
         <OtpInput
           value={otp}
           onChange={(otp) => {
