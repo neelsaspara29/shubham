@@ -9,7 +9,7 @@ const client2 = require("twilio")(accountSid, authToken);
 // const sms = unirest("GET", "https://www.fast2sms.com/dev/bulkV2");
 
 export default async function handler(req, res) {
-  const { name, mobile } = req.body;
+  const { name, mobile, enroll } = req.body;
   console.log(name);
   console.log(mobile);
 
@@ -18,6 +18,17 @@ export default async function handler(req, res) {
   const client = new MongoClient(url);
 
   await client.connect();
+
+  const user = await client
+    .db("LeaseBooks")
+    .collection("user")
+    .aggregate([
+      { $match: { $or: [{ enrollment: enroll }, { mobile: mobile }] } },
+    ]);
+
+  if (user) {
+    return res.status(215).send("User Already registered");
+  }
 
   const data = await client.db("LeaseBooks").collection("registerOtp").findOne({
     mobile: mobile,

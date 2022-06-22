@@ -20,6 +20,7 @@ const schema = yup.object().shape({
 function signup() {
   const router = useRouter();
   const [otpBox, setOtpBox] = useState(false);
+  const [message, setMessage] = useState();
   const {
     register,
     handleSubmit,
@@ -61,20 +62,24 @@ function signup() {
     });
 
     if (String(data.status) == "200") {
-      console.log("ok");
+      setOtpBox(true);
+    }
+
+    if (String(data.status) == "215") {
+      setMessage("User alredy Registered with one of this credentials");
     }
   };
 
   const handleOnSubmit = () => {
-    setOtpBox(true);
     generated();
   };
   return (
     <div className="container">
-      {otpBox && <OtpVerifyOpen onSubmit = {run} mobile = {watch('mobile')} />}
+      {otpBox && <OtpVerifyOpen onSubmit={run} mobile={watch("mobile")} />}
 
       <dive>
         <h5>Welcome to our - BookWorld</h5>
+        {message && <p style={{ color: "red" }}>{message}</p>}
         <form onSubmit={handleSubmit(handleOnSubmit)}>
           <div className="line">
             <p>

@@ -49,7 +49,7 @@ function signin() {
   };
 
   const handleOnSubmit = () => {
-    run()
+    run();
   };
   return (
     <div className="container">
@@ -85,8 +85,8 @@ function signin() {
           </p>
           <p>
             Forgot Password?{" "}
-            <Link href={"/signup"}>
-              <span className="signUPbtn"> Sign Up</span>
+            <Link href={"/forgotpassword"}>
+              <span className="signUPbtn"> forgotpassword</span>
             </Link>
           </p>
         </form>
