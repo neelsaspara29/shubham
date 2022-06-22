@@ -46,6 +46,57 @@ const cart2 = () => {
       item: item,
     });
   };
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
+  const payment = async () => {
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      alert("Razorpay SDK Failed to load");
+      return;
+    }
+    const data = await fetch("/api/razorpay", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: getCartTotal(cart),
+      })
+    }).then((t) =>
+      t.json());
+    var options = {
+      key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
+      name: "S&N Book Servce",
+      currency: data.currency,
+      amount: data.amount,
+      order_id: data.id,
+      description: "Thankyou for Purchase",
+      image: "https://www.nicepng.com/png/detail/809-8092835_gtu-logo-png-georgian-technical-university-logo.png",
+      handler: function (response) {
+        // Validate payment at server - using webhooks is a better idea.
+        alert("payment Success")
+      },
+      prefill: {
+        name: "S&N Book Servce",
+        email: "sanbook@gmail.com",
+        contact: "9879868908",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
   return (
     <>
       <section className={styles.cartheader}>
@@ -118,15 +169,10 @@ const cart2 = () => {
           }
         )}
       </section>
-      <section
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          margin: "auto",
-        }}
-      >
-        <span>Total Qty: {getTotalQty(cart)}</span>
-        <span>Total Amount: {getCartTotal(cart)}/-</span>
+      <section className={styles.totalAmount}>
+        <div>Total Qty: {getTotalQty(cart)}</div>
+        <div>Total Amount: {getCartTotal(cart)}/-</div>
+        <div onClick={() => payment()}>PAY</div>
       </section>
     </>
   );
