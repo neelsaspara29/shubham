@@ -2,7 +2,6 @@ const Razorpay = require("razorpay");
 const shortid = require("shortid");
 
 export default async function handler(req, res) {
-    console.log("enter")
   if (req.method === "POST") {
     // Initialize razorpay object
     const razorpay = new Razorpay({
@@ -12,10 +11,9 @@ export default async function handler(req, res) {
 
     // Create an order -> generate the OrderID -> Send it to the Front-end
     const payment_capture = 1;
-    const amount = 499;
     const currency = "INR";
     const options = {
-      amount: (amount * 100).toString(),
+      amount: JSON.parse(req.body).amount*100,
       currency,
       receipt: shortid.generate(),
       payment_capture,

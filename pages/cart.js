@@ -63,12 +63,17 @@ const cart2 = () => {
   };
   const payment = async () => {
     const res = await initializeRazorpay();
-    
+
     if (!res) {
       alert("Razorpay SDK Failed to load");
       return;
     }
-    const data = await fetch("/api/razorpay", { method: "POST" }).then((t) =>
+    const data = await fetch("/api/razorpay", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: getCartTotal(cart),
+      })
+    }).then((t) =>
       t.json());
     var options = {
       key: process.env.RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
@@ -167,7 +172,7 @@ const cart2 = () => {
       <section className={styles.totalAmount}>
         <div>Total Qty: {getTotalQty(cart)}</div>
         <div>Total Amount: {getCartTotal(cart)}/-</div>
-        <div onClick={()=>payment()}>PAY</div>
+        <div onClick={() => payment()}>PAY</div>
       </section>
     </>
   );
